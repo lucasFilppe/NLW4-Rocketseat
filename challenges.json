@@ -1,0 +1,49 @@
+[
+    {
+        "type": "body",
+        "description": "Estique seus braços com a palma da mao virada para baixo",
+        "amount": 80    
+    },
+
+    {
+        "type": "body",
+        "description": "Puxe seu pescoço com a ajuda da mão para direita e esquerda",
+        "amount": 70    
+    },
+
+    {
+        "type": "body",
+        "description": "Com as duas maos na parte de tras da cabeça, leve-a para baixo",
+        "amount": 60    
+    },
+
+    {
+        "type": "body",
+        "description": "Puxe o joelho contra o peito",
+        "amount": 50    
+    },
+
+    {
+        "type": "eye",
+        "description": "Sentado feche os ohos e os cubra com as mãos por dois minutos",
+        "amount": 90    
+    },
+
+    {
+        "type": "eye",
+        "description": "Em um abiente aberto olhe para todas as direções por 3s",
+        "amount": 140   
+    },
+
+    {
+        "type": "eye",
+        "description": "Em um abiente aberto olhe para todas as direções por 3s",
+        "amount": 140   
+    },
+
+    {
+        "type": "eye",
+        "description": "Faça massagem de baixo da sombracelha",
+        "amount": 70   
+    }
+]
