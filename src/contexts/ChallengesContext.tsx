@@ -1,4 +1,4 @@
-import {createContext, useState, ReactNode} from 'react';
+import {createContext, useState, ReactNode, useEffect} from 'react';
 
 import challenges from '../../challenges.json';
 
@@ -19,6 +19,7 @@ interface ChallangesContextData {
     levelUp: () => void;
     startNewChallenge: () => void;
     resetChallenge: () => void;
+    completeChallange: () => void;
 }
 
 interface ChallengesProviderProps{
@@ -41,6 +42,10 @@ export function ChallengesProvider({children} : ChallengesProviderProps){
 
  //variavel para calcular o level
  const experienceToNextLevel = Math.pow((level + 1) * 4, 2)
+ 
+ useEffect(() => {
+     Notification.requestPermission();
+ }, [])
 
     function levelUp(){
     setLevel(level + 1);
@@ -56,11 +61,36 @@ export function ChallengesProvider({children} : ChallengesProviderProps){
 
         setActiveChallenge(challenge)
 
+        if (Notification.permission === 'granted'){
+            new Notification('Novo desafio', {
+                body:`Valendo ${challenge.amount}xp`
+            } )
+        }
+
     }  
     
     function resetChallenge(){
         setActiveChallenge(null);
     }
+
+    //funçao para quando completa desafio
+    function completeChallange() {
+        if (!activeChallenge) {
+            return;
+        }
+        const { amount } = activeChallenge;
+        let finalExperience = currentExperience + amount;
+
+        if (finalExperience >= experienceToNextLevel) {
+            finalExperience = finalExperience - experienceToNextLevel;
+            levelUp();
+        }
+
+        setCurrentExperience(finalExperience);
+        setActiveChallenge(null);
+        setChallengesCompleted(challengesCompleted + 1);
+    }
+
         return (
         //o Provider faz com que todos elemntos dentro do provider
         // tenham acesso a todos os dados armazenado no contexto
@@ -75,6 +105,7 @@ export function ChallengesProvider({children} : ChallengesProviderProps){
             activeChallenge,
             resetChallenge,
             experienceToNextLevel,
+            completeChallange,
                }}>
       {children}
   </ChallengesContext.Provider>
